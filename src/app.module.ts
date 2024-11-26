@@ -39,7 +39,7 @@ export class AppModule implements NestModule {
         path: "songs/:id",
         method: RequestMethod.DELETE,
       },
-    );  // spesific path and method 
+    ); // spesific path and method
     consumer.apply(LoggerMiddleware).forRoutes(SongsController); // this middleware apply for SongsController all routes
   }
 }
