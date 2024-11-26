@@ -1,11 +1,30 @@
-import { Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from "@nestjs/common";
+import { SongsService } from "./songs.service";
 
 @Controller("songs")
 export class SongsController {
+  constructor(private songService: SongsService) {}
+
+  // crate
   @Post()
-  create() {
-    return "Song Crate ";
+  create(@Body() body: any) {
+    return this.songService.create(body.name);
   }
+
+  // find all
+  @Get()
+  findAll() {
+    return this.songService.findAll();
+  }
+
   @Put(":id")
   update(@Param("id") id) {
     return `Song Update ${id}`;
@@ -18,9 +37,5 @@ export class SongsController {
   @Get(":id")
   findOne(@Param("id") id) {
     return `Song Get ${id}`;
-  }
-  @Get()
-  findAll() {
-    return "Find All Songs end points";
   }
 }
