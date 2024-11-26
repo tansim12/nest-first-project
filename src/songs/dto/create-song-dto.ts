@@ -2,7 +2,6 @@ import {
   ArrayMinSize,
   ArrayNotEmpty,
   IsArray,
-  IsDate,
   IsDateString,
   IsMilitaryTime,
   IsNotEmpty,
