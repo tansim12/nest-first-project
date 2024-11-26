@@ -8,6 +8,7 @@ import {
   Put,
 } from "@nestjs/common";
 import { SongsService } from "./songs.service";
+import { CreateSongDTO } from "./dto/create-song-dto";
 
 @Controller("songs")
 export class SongsController {
@@ -15,8 +16,8 @@ export class SongsController {
 
   // crate
   @Post()
-  create(@Body() body: any) {
-    return this.songService.create(body.name);
+  create(@Body() body: CreateSongDTO) {
+    return this.songService.create(body);
   }
 
   // find all

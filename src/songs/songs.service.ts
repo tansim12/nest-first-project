@@ -9,7 +9,9 @@ export class SongsService {
 
   create(song) {
     this.songs.push(song);
-    return this.songs;
+    return {
+      data: song,
+    };
   }
   findAll() {
     return this.songs;
