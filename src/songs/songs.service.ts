@@ -14,7 +14,7 @@ export class SongsService {
     };
   }
   findAll() {
-    throw new HttpException("There is a error", HttpStatus.FORBIDDEN);
+    // throw new HttpException("There is a error", HttpStatus.FORBIDDEN);
     return this.songs;
   }
 }
