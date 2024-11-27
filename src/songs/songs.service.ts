@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 
 @Injectable()
 export class SongsService {
@@ -14,6 +14,7 @@ export class SongsService {
     };
   }
   findAll() {
+    throw new HttpException("There is a error", HttpStatus.FORBIDDEN);
     return this.songs;
   }
 }

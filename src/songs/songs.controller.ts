@@ -3,7 +3,10 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
+  ParseIntPipe,
   Post,
   Put,
 } from "@nestjs/common";
@@ -23,11 +26,29 @@ export class SongsController {
   // find all
   @Get()
   findAll() {
-    return this.songService.findAll();
+    try {
+      return this.songService.findAll();
+    } catch (error) {
+      console.log({ error });
+
+      throw new HttpException(
+        "Server Error",
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        {
+          cause: error,
+        },
+      );
+    }
   }
 
   @Put(":id")
-  update(@Param("id") id) {
+  update(
+    @Param(
+      "id",
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ) {
     return `Song Update ${id}`;
   }
   @Delete(":id")
@@ -36,7 +57,13 @@ export class SongsController {
   }
 
   @Get(":id")
-  findOne(@Param("id") id) {
+  findOne(
+    @Param(
+      "id",
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ) {
     return `Song Get ${id}`;
   }
 }
